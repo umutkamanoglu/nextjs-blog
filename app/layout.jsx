@@ -1,6 +1,7 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import Header from "@/components/blog/Header";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -18,13 +19,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} antialiased`}
+        className={`${montserrat.variable} antialiased h-screen min-h-screen overflow-auto`}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
         >
+          <Header />
           {children}
         </ThemeProvider>
       </body>
