@@ -26,7 +26,7 @@ const Header = () => {
     const { setTheme } = useTheme();
     return (
         <header
-            className='bg-sidebar h-20 flex items-center justify-between px-[2%]'
+            className='bg-sidebar h-20 flex items-center justify-between px-[10%] sticky top-0'
         >
             <h2 className="font-semibold text-lg">Blog Title</h2>
 
