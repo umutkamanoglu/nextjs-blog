@@ -3,6 +3,8 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import Sidebar from "@/components/admin/App-Sidebar";
+import { Separator } from "@/components/ui/separator";
+import PanelBreadCrumb from "@/components/admin/PanelBreadCrumb";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -30,6 +32,11 @@ export default function RootLayout({ children }) {
                         <main className="flex-1 overflow-auto">
                             <div className="bg-sidebar h-12 flex items-center p-2 fixed top-0 w-full">
                                 <SidebarTrigger />
+                                <Separator
+                                    orientation="vertical"
+                                    className="mx-2 data-[orientation=vertical]:h-4"
+                                />
+                                <PanelBreadCrumb />
                             </div>
                             {children}
                         </main>
