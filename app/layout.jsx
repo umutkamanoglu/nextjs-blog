@@ -2,6 +2,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import Header from "@/components/blog/Header";
+import Footer from "@/components/blog/Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -30,9 +31,7 @@ export default function RootLayout({ children }) {
           <main className="min-h-[calc(100vh-5rem)] mt-20 px-[10%] py-8">
             {children}
           </main>
-          <footer className="bg-sidebar h-24">
-            footer
-          </footer>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
