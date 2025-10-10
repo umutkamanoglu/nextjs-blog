@@ -1,10 +1,9 @@
 import { Montserrat } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import Sidebar from "@/components/admin/App-Sidebar";
-import { Separator } from "@/components/ui/separator";
-import PanelBreadCrumb from "@/components/admin/PanelBreadCrumb";
+import PanelHeader from "@/components/admin/PanelHeader";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -28,18 +27,15 @@ export default function RootLayout({ children }) {
                     enableSystem
                 >
                     <SidebarProvider>
-                        <Sidebar />
-                        <main className="flex-1 overflow-auto">
-                            <div className="bg-sidebar h-12 flex items-center p-2 fixed top-0 w-full">
-                                <SidebarTrigger />
-                                <Separator
-                                    orientation="vertical"
-                                    className="mx-2 data-[orientation=vertical]:h-4"
-                                />
-                                <PanelBreadCrumb />
-                            </div>
-                            {children}
-                        </main>
+                        <div className="grid grid-cols-[auto_1fr] w-full grid-rows-[auto_1fr] h-screen">
+                            <Sidebar className="row-span-2" />
+
+                            <PanelHeader />
+
+                            <main className="overflow-auto col-start-2">
+                                {children}
+                            </main>
+                        </div>
                     </SidebarProvider>
                 </ThemeProvider>
             </body>
