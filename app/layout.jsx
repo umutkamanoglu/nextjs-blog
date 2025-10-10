@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           enableSystem
         >
           <Header />
-          <main className="min-h-[calc(100vh-5rem)] h-[calc(100vh-5rem)] px-[10%] py-8">
+          <main className="min-h-[calc(100vh-5rem)] px-[10%] py-8">
             {children}
           </main>
           <footer className="bg-sidebar h-24">

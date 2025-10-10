@@ -45,7 +45,7 @@ const HomePageTopPosts = () => {
                         return (
                             <div
                                 key={index}
-                                className={`${index == 0 && "row-span-2 max-lg:row-span-1"} bg-cover bg-center bg-no-repeat rounded-md cursor-pointer transition-transform duration-200 hover:scale-105 bg-linear-to-b flex flex-col-reverse p-10`}
+                                className={`${index == 0 && "row-span-2 max-lg:row-span-1 lg:h-[calc(100vh-20rem)]"} max-sm:h-64 max-sm:p-3 bg-cover bg-center bg-no-repeat rounded-md cursor-pointer transition-transform duration-200 hover:scale-[1.02] bg-linear-to-b flex flex-col-reverse p-10`}
                                 style={{
                                     backgroundImage: `linear-gradient(to bottom, transparent, rgba(0,0,0,0.9)), url('https://picsum.photos/1920/1080?random=${post.id}')`,
                                 }}
