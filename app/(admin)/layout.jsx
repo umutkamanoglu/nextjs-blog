@@ -27,8 +27,10 @@ export default function RootLayout({ children }) {
                 >
                     <SidebarProvider>
                         <Sidebar />
-                        <main>
-                            <SidebarTrigger />
+                        <main className="flex-1 overflow-auto">
+                            <div className="bg-sidebar h-12 flex items-center p-2 fixed top-0 w-full">
+                                <SidebarTrigger />
+                            </div>
                             {children}
                         </main>
                     </SidebarProvider>
