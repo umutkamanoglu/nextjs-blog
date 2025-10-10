@@ -1,5 +1,7 @@
 import React from 'react'
 import { User, Calendar, Hash, ArrowRight } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
 
 const PostCard = () => {
     return (
@@ -23,10 +25,12 @@ const PostCard = () => {
                         <Calendar className='inline mr-2 -mt-1' size={15} />
                         <span>20.10.2023</span>
                     </div>
-                    <div className='text-sm'>
-                        <Hash className='inline mr-2 -mt-1' size={15} />
-                        <span>Daily</span>
-                    </div>
+                    <Badge asChild>
+                        <span>
+                            <Hash className='' size={15} />
+                            <Link href="/deneme">Daily</Link>
+                        </span>
+                    </Badge>
                 </div>
                 <p className='line-clamp-2'>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat vero repudiandae possimus voluptates laborum eaque deleniti adipisci quas aliquam, architecto fugit iusto rem ab id? Voluptate delectus illum provident aliquid!
