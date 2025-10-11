@@ -1,3 +1,5 @@
+"use client"
+import React, { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -12,11 +14,14 @@ import {
     FieldDescription,
     FieldGroup,
     FieldLabel,
-    FieldSeparator
+    FieldSeparator,
+    FieldError
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
 export function LoginForm({ className, ...props }) {
+    const [mailValid, setMailValid] = useState(true)
+    const [passValid, setPassValid] = useState(true)
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
@@ -36,7 +41,13 @@ export function LoginForm({ className, ...props }) {
                                     type="email"
                                     placeholder="m@example.com"
                                     required
+                                    aria-invalid={!mailValid}
+                                    onChangeCapture={(e) => {
+                                        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                                        setMailValid(regex.test(e.target.value))
+                                    }}
                                 />
+                                {!mailValid && <FieldError>Enter a valid email address.</FieldError>}
                             </Field>
                             <Field>
                                 <div className="flex items-center">
@@ -48,7 +59,17 @@ export function LoginForm({ className, ...props }) {
                                         Forgot your password?
                                     </a>
                                 </div>
-                                <Input id="password" type="password" required />
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    required
+                                    aria-invalid={!passValid}
+                                    onChangeCapture={(e) => {
+                                        const regex = /^.{6,}$/;
+                                        setPassValid(regex.test(e.target.value))
+                                    }}
+                                />
+                                {!passValid && <FieldError>The password must contain at least 6 characters.</FieldError>}
                             </Field>
                             <Field>
                                 <Button type="submit">Login</Button>
