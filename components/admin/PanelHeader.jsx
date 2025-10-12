@@ -18,8 +18,8 @@ function PanelHeader() {
                 <PanelBreadCrumb />
             </div>
             <DropdownMenu>
-                <DropdownMenuTrigger>
-                    <Avatar className="cursor-pointer">
+                <DropdownMenuTrigger className="focus:outline-none">
+                    <Avatar className="cursor-pointer bg-red-500">
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
