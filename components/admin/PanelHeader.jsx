@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import { SidebarTrigger, useSidebar } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
 import PanelBreadCrumb from '@/components/admin/PanelBreadCrumb'
@@ -7,9 +8,37 @@ import {
     DropdownMenu, DropdownMenuGroup, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogOut } from 'lucide-react'
+import axios from 'axios'
+import { useRouter } from "next/navigation";
 
 function PanelHeader() {
     const { isMobile } = useSidebar
+    const router = useRouter()
+
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        axios({
+            method: "GET",
+            url: "/api/user/getMe"
+        })
+            .then((res) => {
+                setUser(res.data)
+            })
+    }, [])
+
+    const logoutHandle = () => {
+        axios({
+            method: "POST",
+            url: "/api/auth/logout"
+        })
+            .then((res) => {
+                if (res.data.status == "ok") {
+                    router.push("/login")
+                }
+            })
+    }
+
     return (
         <header className="bg-sidebar h-12 flex items-center justify-between px-5 sticky top-0 z-50 col-start-2">
             <div className="flex items-center">
@@ -19,9 +48,9 @@ function PanelHeader() {
             </div>
             <DropdownMenu>
                 <DropdownMenuTrigger className="focus:outline-none">
-                    <Avatar className="cursor-pointer bg-red-500">
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
+                    <Avatar className="cursor-pointer">
+                        {user?.avatar_url && <AvatarImage src="https://github.com/shadcn.png" />}
+                        <AvatarFallback>{user?.username.slice(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -33,19 +62,19 @@ function PanelHeader() {
                     <DropdownMenuLabel className="p-0 font-normal">
                         <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                             <Avatar className="h-8 w-8 rounded-lg">
-                                <AvatarImage src="https://github.com/shadcn.png" alt="admin" />
-                                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                                {user?.avatar_url && <AvatarImage src="https://github.com/shadcn.png" alt={user?.username} />}
+                                <AvatarFallback>{user?.username.slice(0, 2).toUpperCase()}</AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium">admin</span>
+                                <span className="truncate font-medium">{user?.username}</span>
                                 <span className="text-muted-foreground truncate text-xs">
-                                    admin@admin.com
+                                    {user?.email}
                                 </span>
                             </div>
                         </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
+                    <DropdownMenuGroup className="[&_*]:cursor-pointer">
                         <DropdownMenuItem>
                             Account
                         </DropdownMenuItem>
@@ -57,7 +86,10 @@ function PanelHeader() {
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={logoutHandle}
+                    >
                         <LogOut />
                         Log out
                     </DropdownMenuItem>
