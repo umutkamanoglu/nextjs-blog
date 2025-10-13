@@ -13,6 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { Skeleton } from "@/components/ui/skeleton";
 import { LogOut } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -52,14 +54,18 @@ function PanelHeader() {
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger className="focus:outline-none">
-          <Avatar className="cursor-pointer">
-            {user?.avatar_url && (
-              <AvatarImage src="https://github.com/shadcn.png" />
-            )}
-            <AvatarFallback>
-              {user?.username.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          {user ? (
+            <Avatar className="cursor-pointer">
+              {user?.avatar_url && (
+                <AvatarImage src="https://github.com/shadcn.png" />
+              )}
+              <AvatarFallback>
+                {user?.username.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          ) : (
+            <Skeleton className="h-8 w-8 rounded-full cursor-pointer" />
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent
           className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
