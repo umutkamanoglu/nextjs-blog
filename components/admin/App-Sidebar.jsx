@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -31,7 +32,7 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 import {
   Calendar,
@@ -45,8 +46,9 @@ import {
   ChevronRight,
   NotebookText,
 } from "lucide-react";
+
 import Posts from "@/components/admin/sidebar/Posts";
-import { Separator } from "@/components/ui/separator";
+import User from "@/components/admin/sidebar/User";
 
 const items = [
   {
@@ -94,7 +96,7 @@ function AppSidebar() {
       <SidebarContent>
 
         <Posts />
-
+        <User />
 
       </SidebarContent>
 
