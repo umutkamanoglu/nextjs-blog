@@ -12,6 +12,8 @@ import {
   SidebarMenuItem,
   SidebarHeader,
   SidebarFooter,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
@@ -23,6 +25,11 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -34,7 +41,12 @@ import {
   Settings,
   ShieldUser,
   Eye,
+  ChevronDown,
+  ChevronRight,
+  NotebookText,
 } from "lucide-react";
+import Posts from "@/components/admin/sidebar/Posts";
+import { Separator } from "@/components/ui/separator";
 
 const items = [
   {
@@ -75,27 +87,15 @@ function AppSidebar() {
             <ShieldUser size={20} />
             <h2 className="font-semibold p-2">Admin Dashboard</h2>
           </SidebarMenuItem>
+          <Separator />
         </SidebarMenu>
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+
+        <Posts />
+
+
       </SidebarContent>
 
       <SidebarFooter>
