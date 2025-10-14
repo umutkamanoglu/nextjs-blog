@@ -8,13 +8,14 @@ import {
     UserCog,
     ChevronRight,
 } from "lucide-react";
+import Link from 'next/link';
 
 function User() {
 
     const items = [
         {
             title: "List All User's",
-            url: "#",
+            url: "/admin/users",
             icon: List
         },
         {
@@ -41,10 +42,10 @@ function User() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link href={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}

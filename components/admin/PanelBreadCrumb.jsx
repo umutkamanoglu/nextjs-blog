@@ -35,22 +35,24 @@ function PanelBreadCrumb() {
                     const label = labelMap[segment] || decodeURIComponent(segment)
 
                     return (
-                        <BreadcrumbItem key={href}>
-                            {!isLast ? (
-                                <>
+                        <React.Fragment key={href}>
+                            <BreadcrumbItem>
+                                {!isLast ? (
                                     <BreadcrumbLink asChild>
                                         <Link href={href} className="capitalize">
                                             {label}
                                         </Link>
                                     </BreadcrumbLink>
-                                    <BreadcrumbSeparator />
-                                </>
-                            ) : (
-                                <BreadcrumbPage className="capitalize">
-                                    {label}
-                                </BreadcrumbPage>
-                            )}
-                        </BreadcrumbItem>
+                                ) : (
+                                    <BreadcrumbPage className="capitalize">
+                                        {label}
+                                    </BreadcrumbPage>
+                                )}
+                            </BreadcrumbItem>
+
+                            {/* 🔹 Separator artık BreadcrumbItem dışında */}
+                            {!isLast && <BreadcrumbSeparator />}
+                        </React.Fragment>
                     )
                 })}
             </BreadcrumbList>
